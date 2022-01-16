@@ -16,30 +16,51 @@ var LinkedList = function () {
     //l.addToTail(a);
 
     var newNode = Node(value);
-
+    //var currentNode;
+    //debugger;
     if (!list.head) {
       list.head = newNode;
       list.tail = newNode;
+      //currentNode = list.head;
     } else {
-      list.tail = newNode;
       list.tail.next = newNode;
+      list.tail = newNode;
+
     }
     return list;
   };
 
   list.removeHead = function () {
-    if(!list.head) {
+    //debugger;
+    if(list.head) {
       //remove head
       var returnNode = list.head;
+      // list.head = list.head.next;
       // delete and replace
       list.head = returnNode.next;
-      return returnNode.value;
+      return returnNode.next.value;
     } else {
-      return list.head;
+      return list.head.value;
     }
   };
 
   list.contains = function (target) {
+    //iterate through every node in the list
+    // start with the head node
+    // head next until to null
+    // checking if list.head.value equals to target
+    //debugger;
+    var checkNode = function(node) {
+      if (node) {
+        if (node.value !== target) {
+          checkNode(node.next);
+        } else {
+          return true;
+        }
+      }
+      return false;
+    };
+    return checkNode(list.head);
   };
 
   return list;
