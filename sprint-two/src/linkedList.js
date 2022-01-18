@@ -10,27 +10,22 @@ var LinkedList = function () {
     // head = tail = node for the first node in the list
     // after the first node then we can add to head or tail
     // must replace the last nodes .next property with the one we add to the tail
-    //class of value is a Node
-    //var a = Node('a');
-    //l = LinkedList();
-    //l.addToTail(a);
+    // O(1)
 
     var newNode = Node(value);
-    //var currentNode;
     //debugger;
     if (!list.head) {
       list.head = newNode;
       list.tail = newNode;
-      //currentNode = list.head;
     } else {
       list.tail.next = newNode;
       list.tail = newNode;
-
     }
     return list;
   };
 
   list.removeHead = function () {
+    // O(1)
     //debugger;
     if(list.head) {
       //remove head
@@ -38,9 +33,9 @@ var LinkedList = function () {
       // list.head = list.head.next;
       // delete and replace
       list.head = returnNode.next;
-      return returnNode.next.value;
+      return returnNode.value;
     } else {
-      return list.head.value;
+      return null;
     }
   };
 
@@ -50,17 +45,20 @@ var LinkedList = function () {
     // head next until to null
     // checking if list.head.value equals to target
     //debugger;
+    // O(n)
+    var result = false;
     var checkNode = function(node) {
       if (node) {
         if (node.value !== target) {
           checkNode(node.next);
         } else {
-          return true;
+          result = true;
         }
       }
-      return false;
     };
-    return checkNode(list.head);
+    checkNode(list.head);
+
+    return result;
   };
 
   return list;
