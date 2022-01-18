@@ -2,26 +2,40 @@
 
 // Instantiate a new graph
 var Graph = function() {
+  //psuedoclassical style
+  this.nodes = [];
+  this.edges = {}; // { 1: [2,3], 2: [1], . . . }
 };
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
+  this.nodes.push(node);
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node) {
+  return this.nodes.includes(node);
 };
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
+  var index = this.nodes.indexOf(node);
+  delete this.nodes[index];
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
+  debugger;
+  return this.edges.includes([fromNode, toNode]);
 };
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
+  var edge = {}
+  edge[fromNode].push(toNode)
+
+  if (this.edges) {};
+  this.edges.push(edge);
 };
 
 // Remove an edge between any two specified (by value) nodes.
