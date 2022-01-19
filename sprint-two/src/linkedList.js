@@ -50,7 +50,8 @@ var LinkedList = function () {
     var checkNode = function(node) {
       if (node) {
         if (node.value !== target) {
-          checkNode(node.next);
+          node = node.next
+          checkNode(node);
         } else {
           result = true;
         }
