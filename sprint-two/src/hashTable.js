@@ -8,27 +8,58 @@ var HashTable = function() {
 HashTable.prototype.insert = function(k, v) {
   debugger;
   var index = getIndexBelowMaxForKey(k, this._limit);
+  var tuple = [k, v];
   //check if the index is taken
-  if (k) {
-    // if not, then we use set function
-    this._storage.set(index, v);
+  //we dont have access to this._storage[index]in this scope
+  //so we have to use this._storage.get()
+  if (!this._storage.get(index)) {
+    this._storage.set(index, [tuple]);
     // else
   } else {
-    // generate a new index
-    newIndex = getIndexBelowMaxForKey(k+1, this._limit);
-    // use set function again
-    this._storage.set(newIndex, v);
+    var bucket =this._storage.get(index);
+    // iterate through tuple
+    for (var i = 0; i < bucket.length; i++) {
+      // check if any of keys exists already
+      //bucket = [[k, v], ...]
+      //bucket[i] = [k, v]
+      //bucket[i][0] = k
+      //bucket[i][1] = v
+      if (bucket[i][0] === k) {
+        // if so, replace value
+        bucket[i][1] = v;
+      }else{
+        // else push it to the index
+        bucket.push(tuple)
+      }
+    }
   }
 };
 
 HashTable.prototype.retrieve = function(k) {
+  debugger;
   var index = getIndexBelowMaxForKey(k, this._limit);
-  return this._storage.get(index);
+  var bucket =this._storage.get(index);
+  if (bucket) {
+    for (var i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === k) {
+        return bucket[i][1];
+      }
+    }
+  }
 };
 
 HashTable.prototype.remove = function(k) {
+  debugger;
   var index = getIndexBelowMaxForKey(k, this._limit);
-  this._storage.set(index, undefined);
+  var bucket =this._storage.get(index);
+  if(bucket) {
+    for (var i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === k) {
+        bucket[i][0] = undefined;
+        bucket[i][1] = undefined;
+      }
+    }
+  }
 };
 
 
