@@ -12,6 +12,7 @@ var Tree = function(value) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
+  //O(1)
   // create a var newTree
   var newNode = Tree(value);
   // push the newTree onto the children property
@@ -19,6 +20,7 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
+  //O(n)
   // create a var result
   var result = false;
   var searchTree = function(tree) {

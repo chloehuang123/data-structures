@@ -6,7 +6,8 @@ var HashTable = function() {
 };
 
 HashTable.prototype.insert = function(k, v) {
-  debugger;
+  //O(1)
+  //debugger;
   var index = getIndexBelowMaxForKey(k, this._limit);
   var tuple = [k, v];
   //check if the index is taken
@@ -36,7 +37,8 @@ HashTable.prototype.insert = function(k, v) {
 };
 
 HashTable.prototype.retrieve = function(k) {
-  debugger;
+  //O(1)
+  //debugger;
   var index = getIndexBelowMaxForKey(k, this._limit);
   var bucket =this._storage.get(index);
   if (bucket) {
@@ -49,7 +51,8 @@ HashTable.prototype.retrieve = function(k) {
 };
 
 HashTable.prototype.remove = function(k) {
-  debugger;
+  //O(1)
+  //debugger;
   var index = getIndexBelowMaxForKey(k, this._limit);
   var bucket =this._storage.get(index);
   if(bucket) {
